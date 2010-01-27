@@ -1,0 +1,10 @@
+@ECHO_OFF
+REM %1 old branch url
+REM %2 new branch url
+REM %3 target directory (created)
+
+mkdir %3
+java -jar svn-diff-export-1.0.jar diff %1 %2 %3\diff.patch
+java -jar svn-diff-export-1.0.jar export %3\diff.patch %1 %2 %3
+java -jar svn-diff-export-1.0.jar revision %2 %3\public\revision.txt
+java -jar svn-diff-export-1.0.jar zip %3
